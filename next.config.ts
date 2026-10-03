@@ -5,6 +5,10 @@ const supabaseHost = process.env.NEXT_PUBLIC_SUPABASE_URL
   : undefined;
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Admin product-image uploads (max 5 MB file + form fields).
+    serverActions: { bodySizeLimit: "6mb" },
+  },
   images: {
     // Product images are served from Supabase Storage (public buckets).
     remotePatterns: supabaseHost

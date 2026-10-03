@@ -18,6 +18,8 @@ export type OrderStatus =
   | "cancelled"
   | "refunded";
 
+export type UserRole = "customer" | "admin";
+
 export type Database = {
   public: {
     Tables: {
@@ -45,6 +47,7 @@ export type Database = {
           full_name: string | null;
           phone: string | null;
           avatar_url: string | null;
+          role: UserRole;
           created_at: string;
           updated_at: string;
         };
@@ -53,6 +56,7 @@ export type Database = {
           full_name?: string | null;
           phone?: string | null;
           avatar_url?: string | null;
+          role?: UserRole;
           created_at?: string;
           updated_at?: string;
         };
@@ -61,6 +65,7 @@ export type Database = {
           full_name?: string | null;
           phone?: string | null;
           avatar_url?: string | null;
+          role?: UserRole;
           created_at?: string;
           updated_at?: string;
         };
@@ -312,7 +317,28 @@ export type Database = {
       };
     };
     Views: { [_ in never]: never };
-    Functions: { [_ in never]: never };
+    Functions: {
+      place_order: { Args: { p_shipping: Json }; Returns: string };
+      is_admin: { Args: Record<string, never>; Returns: boolean };
+      admin_stats: { Args: Record<string, never>; Returns: Json };
+      admin_list_customers: {
+        Args: Record<string, never>;
+        Returns: {
+          id: string;
+          email: string;
+          full_name: string | null;
+          phone: string | null;
+          role: UserRole;
+          created_at: string;
+          order_count: number;
+          total_spent: number;
+        }[];
+      };
+      admin_set_order_status: {
+        Args: { p_order: string; p_status: OrderStatus };
+        Returns: undefined;
+      };
+    };
     Enums: { [_ in never]: never };
     CompositeTypes: { [_ in never]: never };
   };

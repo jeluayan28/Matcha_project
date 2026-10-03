@@ -14,7 +14,7 @@ import {
 
 const NAV = [
   { href: "/", label: "Home" },
-  { href: "/#featured", label: "Shop" },
+  { href: "/shop", label: "Shop" },
   { href: "/#story", label: "About" },
   { href: "/journal", label: "Journal" },
 ];

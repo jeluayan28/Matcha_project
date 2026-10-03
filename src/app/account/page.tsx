@@ -1,69 +1,74 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { SiteHeader } from "@/components/layout/site-header";
-import { LogoutButton } from "@/components/auth/logout-button";
-import { createClient } from "@/lib/supabase/server";
+import Link from "next/link";
+import { ProfileForm } from "@/components/account/account-forms";
+import { formatDate } from "@/lib/account/status";
+import { requireUser } from "@/lib/auth/session";
 
-export const metadata: Metadata = { title: "My account — Matcha" };
+export const metadata: Metadata = { title: "My account" };
 
-export default async function AccountPage() {
-  const supabase = await createClient();
+export default async function ProfilePage() {
+  const { supabase, user } = await requireUser("/account");
 
-  // getUser() re-validates the session with Supabase Auth, unlike a cookie read.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/login?next=/account");
-
-  // RLS limits this to the signed-in user's own row.
-  const { data: profile } = await supabase
+  // RLS limits this to the signed-in user's own row; the filter makes it explicit.
+  const { data: profile, error } = await supabase
     .from("profiles")
-    .select("full_name, phone, created_at")
+    .select("full_name, phone, role, created_at")
     .eq("id", user.id)
     .maybeSingle();
 
-  const name =
-    profile?.full_name ?? (user.user_metadata?.full_name as string | undefined);
-  const memberSince = new Date(
-    profile?.created_at ?? user.created_at
-  ).toLocaleDateString("en-US", { year: "numeric", month: "long" });
+  const fullName =
+    profile?.full_name ?? (user.user_metadata?.full_name as string | undefined) ?? "";
 
   return (
-    <>
-      <SiteHeader />
-      <main className="flex flex-1 flex-col items-center bg-cream px-5 py-14">
-      <div className="w-full max-w-xl">
-        <div className="rounded-3xl border border-border bg-card px-6 py-9 shadow-sm shadow-forest/5 sm:px-10">
-          <h1 className="text-4xl font-medium text-forest">
-            {name ? `Hello, ${name.split(" ")[0]}` : "Your account"}
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Manage your details and sign out below.
+    <div className="grid gap-8 md:grid-cols-2">
+      <section aria-labelledby="profile" className="h-fit rounded-3xl border border-border bg-card p-6 sm:p-8">
+        <h2 id="profile" className="text-2xl font-medium text-forest">
+          Profile
+        </h2>
+        <dl className="mt-5 divide-y divide-border text-sm">
+          <Row label="Name" value={fullName} />
+          <Row label="Email" value={user.email} />
+          <Row label="Phone" value={profile?.phone} />
+          {profile?.role === "admin" && <Row label="Role" value="Admin" />}
+          <Row label="Member since" value={formatDate(profile?.created_at ?? user.created_at)} />
+        </dl>
+        {profile?.role === "admin" && (
+          <Link
+            href="/admin"
+            className="mt-5 inline-flex h-10 items-center rounded-full bg-matcha px-6 text-sm font-medium text-forest hover:bg-matcha/85"
+          >
+            Admin dashboard
+          </Link>
+        )}
+      </section>
+
+      <section aria-labelledby="edit" className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+        <h2 id="edit" className="text-2xl font-medium text-forest">
+          Edit details
+        </h2>
+        {error ? (
+          <p role="alert" className="mt-4 text-sm text-destructive">
+            We couldn&apos;t load your profile. Refresh the page to try again.
           </p>
-
-          <dl className="mt-8 divide-y divide-border text-sm">
-            <Row label="Name" value={name} />
-            <Row label="Email" value={user.email} />
-            <Row label="Phone" value={profile?.phone} />
-            <Row label="Member since" value={memberSince} />
-          </dl>
-
-          <div className="mt-8">
-            <LogoutButton />
+        ) : (
+          <div className="mt-5">
+            <ProfileForm fullName={fullName} phone={profile?.phone ?? ""} />
           </div>
-        </div>
-      </div>
-      </main>
-    </>
+        )}
+        <p className="mt-4 text-xs text-forest/60">
+          Your email is your sign-in and can&apos;t be changed here.
+        </p>
+      </section>
+    </div>
   );
 }
 
 function Row({ label, value }: { label: string; value?: string | null }) {
   return (
     <div className="flex items-baseline justify-between gap-4 py-3.5">
-      <dt className="text-muted-foreground">{label}</dt>
+      <dt className="text-forest/60">{label}</dt>
       <dd className="text-right font-medium text-forest">
-        {value || <span className="font-normal text-muted-foreground">—</span>}
+        {value || <span className="font-normal text-forest/50">—</span>}
       </dd>
     </div>
   );

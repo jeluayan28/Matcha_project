@@ -1,36 +1,15 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Leaf } from "lucide-react";
+import { ProductCard } from "@/components/shop/product-card";
 import { createClient } from "@/lib/supabase/server";
-
-const priceFormat = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
-
-const supabaseHost = process.env.NEXT_PUBLIC_SUPABASE_URL
-  ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
-  : undefined;
-
-// next/image only serves hosts allowed in next.config.ts (Supabase Storage).
-function isAllowedImage(url: string | null): url is string {
-  if (!url || !supabaseHost) return false;
-  try {
-    const { hostname, pathname } = new URL(url);
-    return (
-      hostname === supabaseHost &&
-      pathname.startsWith("/storage/v1/object/public/")
-    );
-  } catch {
-    return false;
-  }
-}
 
 async function getFeaturedProducts() {
   const supabase = await createClient();
   return supabase
     .from("products")
-    .select("id, name, slug, description, price, image_url, stock, categories(name)")
+    .select(
+      "id, name, slug, description, price, image_url, stock, is_featured, categories(name, slug)"
+    )
     .eq("is_featured", true)
     .order("created_at", { ascending: false })
     .limit(4);
@@ -65,49 +44,17 @@ export async function FeaturedProducts() {
         ) : (
           <ul className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((product) => (
-              <li key={product.id} className="group">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-sage/40">
-                  {isAllowedImage(product.image_url) ? (
-                    <Image
-                      src={product.image_url}
-                      alt={product.name}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center text-forest/30">
-                      <Leaf className="size-12" strokeWidth={1.25} aria-hidden />
-                    </div>
-                  )}
-                  {product.stock === 0 && (
-                    <span className="absolute top-3 left-3 rounded-full bg-cream px-3 py-1 text-xs font-medium text-forest">
-                      Sold out
-                    </span>
-                  )}
-                </div>
-                <div className="mt-4 flex items-baseline justify-between gap-4">
-                  <h3 className="text-2xl leading-tight font-medium text-forest">
-                    {product.name}
-                  </h3>
-                  <p className="shrink-0 text-base font-medium text-forest">
-                    {priceFormat.format(product.price)}
-                  </p>
-                </div>
-                {product.categories?.name && (
-                  <p className="mt-1 text-sm text-forest/60">
-                    {product.categories.name}
-                  </p>
-                )}
-                {product.description && (
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-forest/70">
-                    {product.description}
-                  </p>
-                )}
-              </li>
+              <ProductCard key={product.id} product={product} returnTo="/" />
             ))}
           </ul>
         )}
+
+        <Link
+          href="/shop"
+          className="mt-12 inline-flex h-11 items-center rounded-full border border-forest/25 px-7 text-sm font-medium text-forest transition-colors hover:bg-sage/30"
+        >
+          Shop all matcha
+        </Link>
       </div>
     </section>
   );

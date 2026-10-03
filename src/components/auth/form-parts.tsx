@@ -4,21 +4,23 @@ import { Input } from "@/components/ui/input";
 export function Field({
   label,
   name,
+  id = name,
   error,
   ...props
 }: Omit<React.ComponentProps<"input">, "name"> & {
   label: string;
   name: string;
+  id?: string;
   error?: string;
 }) {
-  const errorId = `${name}-error`;
+  const errorId = `${id}-error`;
   return (
     <div className="space-y-1.5">
-      <label htmlFor={name} className="block text-sm font-medium text-forest">
+      <label htmlFor={id} className="block text-sm font-medium text-forest">
         {label}
       </label>
       <Input
-        id={name}
+        id={id}
         name={name}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
