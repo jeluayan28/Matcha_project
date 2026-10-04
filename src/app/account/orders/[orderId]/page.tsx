@@ -78,7 +78,7 @@ export default async function OrderDetailPage({
           <ul className="mt-2 divide-y divide-border">
             {order.order_items.map((item) => (
               <li key={item.id} className="flex gap-4 py-4">
-                <div className="relative size-16 shrink-0 overflow-hidden rounded-xl bg-sage/40">
+                <div className="relative size-16 shrink-0 overflow-hidden rounded-3xl bg-sage">
                   {isAllowedImage(item.products?.image_url ?? null) ? (
                     <Image src={item.products!.image_url!} alt="" fill sizes="64px" className="object-cover" />
                   ) : (

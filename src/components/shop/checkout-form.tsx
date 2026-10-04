@@ -61,7 +61,7 @@ export function CheckoutForm({
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex h-12 w-full items-center justify-center rounded-full bg-matcha text-base font-medium text-forest transition-colors hover:bg-matcha/85 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex h-12 w-full items-center justify-center rounded-full bg-matcha text-base font-medium text-white transition-colors hover:bg-forest disabled:cursor-not-allowed disabled:opacity-60"
       >
         {pending ? "Placing order…" : "Place order"}
       </button>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { AuthListener } from "@/components/auth/auth-listener";
 import "./globals.css";
@@ -18,6 +18,13 @@ export const metadata: Metadata = {
   title: "Matcha — Premium Ceremonial Matcha",
   description:
     "Premium Japanese matcha, stone-ground and delivered fresh to your door.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#F7F5EC",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

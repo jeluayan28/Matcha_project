@@ -9,16 +9,16 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="flex min-h-full flex-1 flex-col bg-cream">
       <header className="border-b border-border bg-cream">
-        <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
           <Link href="/admin" className="font-heading text-2xl font-semibold tracking-[0.04em] text-forest">
             mori <span className="text-sm font-normal tracking-normal text-forest/60">admin</span>
           </Link>
-          <Link href="/" className="text-sm text-forest/70 hover:text-forest">
+          <Link href="/" className="inline-flex h-11 items-center text-sm text-forest/70 hover:text-forest">
             View store →
           </Link>
         </div>
       </header>
-      <div className="mx-auto grid w-full max-w-7xl flex-1 gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[13rem_1fr]">
+      <div className="mx-auto grid w-full max-w-7xl flex-1 gap-6 px-5 py-6 sm:px-8 sm:py-8 lg:gap-8 lg:grid-cols-[13rem_1fr]">
         <aside className="lg:sticky lg:top-6 lg:h-fit">
           <AdminNav />
         </aside>

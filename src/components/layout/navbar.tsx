@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, Search, ShoppingBag, User } from "lucide-react";
 import {
@@ -20,7 +20,13 @@ const NAV = [
 ];
 
 const iconButton =
-  "relative inline-flex size-10 items-center justify-center rounded-full text-forest transition-colors hover:bg-sage/30 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none";
+  "relative inline-flex size-11 items-center justify-center rounded-full text-forest transition-colors hover:bg-sage/70 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none";
+
+// Home matches exactly; hash links (About) never count as the current page.
+function isActive(pathname: string, href: string) {
+  if (href.includes("#")) return false;
+  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+}
 
 export function Navbar({
   signedIn,
@@ -30,6 +36,7 @@ export function Navbar({
   cartCount: number;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -64,30 +71,38 @@ export function Navbar({
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b transition-[background-color,border-color,box-shadow] duration-300 ${
+      className={`sticky top-0 z-40 border-b transition-[background-color,border-color] duration-300 ${
         scrolled
-          ? "border-border/70 bg-cream/90 shadow-sm shadow-forest/5 backdrop-blur"
+          ? "border-border bg-cream/90 backdrop-blur"
           : "border-transparent bg-cream"
       }`}
     >
       <div className="mx-auto grid h-16 w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8">
         <Link
           href="/"
-          className="justify-self-start font-heading text-3xl leading-none font-semibold tracking-[0.04em] text-forest"
+          className="-ml-1 justify-self-start px-1 py-3 font-heading text-3xl leading-none font-semibold tracking-[0.08em] text-forest"
         >
           mori
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-9 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-sm text-forest/75 transition-colors hover:text-forest"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative py-3 text-sm tracking-wide transition-colors after:absolute after:inset-x-0 after:bottom-2 after:h-px after:origin-left after:bg-gold after:transition-transform after:duration-300 ${
+                  active
+                    ? "text-forest after:scale-x-100"
+                    : "text-forest/70 after:scale-x-0 hover:text-forest hover:after:scale-x-100"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="col-start-3 flex items-center gap-1 justify-self-end">
@@ -113,7 +128,7 @@ export function Navbar({
             {cartCount > 0 && (
               <span
                 aria-hidden
-                className="absolute top-0.5 right-0 flex min-w-4.5 items-center justify-center rounded-full bg-matcha px-1 text-[0.65rem] leading-[1.15rem] font-semibold text-forest"
+                className="absolute top-0.5 right-0 flex min-w-4.5 items-center justify-center rounded-full bg-gold px-1 text-[0.65rem] leading-[1.15rem] font-semibold text-forest"
               >
                 {badge}
               </span>
@@ -127,7 +142,7 @@ export function Navbar({
             >
               <Menu className="size-5" strokeWidth={1.6} />
             </SheetTrigger>
-            <SheetContent side="right" className="bg-cream px-6 pt-16">
+            <SheetContent side="right" className="bg-cream px-7 pt-20">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <nav aria-label="Mobile" className="flex flex-col">
                 {NAV.map((item) => (
@@ -136,11 +151,15 @@ export function Navbar({
                     render={
                       <Link
                         href={item.href}
-                        className="border-b border-border/70 py-4 font-heading text-3xl text-forest"
+                        aria-current={isActive(pathname, item.href) ? "page" : undefined}
+                        className="flex items-center justify-between border-b border-border py-5 font-heading text-3xl text-forest transition-colors hover:text-matcha aria-[current=page]:text-matcha"
                       />
                     }
                   >
                     {item.label}
+                    <span aria-hidden className="text-lg text-gold">
+                      →
+                    </span>
                   </SheetClose>
                 ))}
                 <SheetClose
@@ -184,11 +203,11 @@ export function Navbar({
               onKeyDown={(event) => {
                 if (event.key === "Escape") setSearchOpen(false);
               }}
-              className="h-10 min-w-0 flex-1 bg-transparent font-heading text-2xl text-forest outline-none placeholder:text-forest/40"
+              className="h-11 min-w-0 flex-1 bg-transparent font-heading text-2xl text-forest outline-none placeholder:text-forest/40"
             />
             <button
               type="submit"
-              className="h-10 rounded-full bg-matcha px-6 text-sm font-medium text-forest transition-colors hover:bg-matcha/85"
+              className="h-11 rounded-full bg-matcha px-6 text-sm font-medium text-white transition-colors hover:bg-forest"
             >
               Search
             </button>

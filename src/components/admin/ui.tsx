@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 export const adminButton =
-  "inline-flex h-10 items-center justify-center rounded-full bg-matcha px-6 text-sm font-medium text-forest transition-colors hover:bg-matcha/85 disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex h-11 items-center justify-center rounded-full bg-matcha px-6 text-sm font-medium text-white transition-colors hover:bg-forest disabled:cursor-not-allowed disabled:opacity-60";
 export const adminButtonOutline =
-  "inline-flex h-10 items-center justify-center rounded-full border border-forest/25 px-6 text-sm font-medium text-forest transition-colors hover:bg-sage/30 disabled:opacity-60";
+  "inline-flex h-11 items-center justify-center rounded-full border border-forest/25 px-6 text-sm font-medium text-forest transition-colors hover:bg-sage/70 disabled:opacity-60";
 
 export function PageHeader({
   title,
@@ -15,9 +15,9 @@ export function PageHeader({
   action?: { href: string; label: string };
 }) {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-4">
+    <div className="flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
       <div>
-        <h1 className="text-4xl font-medium text-forest sm:text-5xl">{title}</h1>
+        <h1 className="text-3xl font-medium text-forest sm:text-5xl">{title}</h1>
         {subtitle && <p className="mt-2 text-forest/70">{subtitle}</p>}
       </div>
       {action && (
@@ -37,7 +37,7 @@ export function Card({
   className?: string;
 }) {
   return (
-    <div className={`rounded-3xl border border-border bg-card p-5 sm:p-6 ${className}`}>
+    <div className={`rounded-3xl border border-border bg-card p-4 sm:p-6 ${className}`}>
       {children}
     </div>
   );
@@ -65,7 +65,7 @@ export const td = "px-4 py-3 align-middle";
 export function Table({ children }: { children: React.ReactNode }) {
   return (
     <div className="overflow-x-auto rounded-3xl border border-border bg-card">
-      <table className="w-full min-w-[40rem] text-sm text-forest">{children}</table>
+      <table className="rtable w-full min-w-[40rem] text-sm text-forest">{children}</table>
     </div>
   );
 }

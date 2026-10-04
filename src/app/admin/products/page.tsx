@@ -41,9 +41,9 @@ export default async function AdminProducts() {
           <tbody className="divide-y divide-border">
             {products.map((p) => (
               <tr key={p.id}>
-                <td className={td}>
+                <td data-label="Product" className={td}>
                   <div className="flex items-center gap-3">
-                    <div className="relative size-12 shrink-0 overflow-hidden rounded-xl bg-sage/40">
+                    <div className="relative size-12 shrink-0 overflow-hidden rounded-3xl bg-sage">
                       {isAllowedImage(p.image_url) ? (
                         <Image src={p.image_url} alt="" fill sizes="48px" className="object-cover" />
                       ) : (
@@ -58,12 +58,12 @@ export default async function AdminProducts() {
                     </div>
                   </div>
                 </td>
-                <td className={td}>{p.categories?.name ?? "—"}</td>
-                <td className={`${td} text-right`}>{formatPrice(p.price)}</td>
-                <td className={`${td} text-right ${p.stock === 0 ? "text-destructive" : ""}`}>{p.stock}</td>
-                <td className={td}>
-                  <div className="flex items-start justify-end gap-4">
-                    <Link href={`/admin/products/${p.id}`} className="text-sm underline underline-offset-4">Edit</Link>
+                <td data-label="Category" className={td}>{p.categories?.name ?? "—"}</td>
+                <td data-label="Price" className={`${td} text-right`}>{formatPrice(p.price)}</td>
+                <td data-label="Stock" className={`${td} text-right ${p.stock === 0 ? "text-destructive" : ""}`}>{p.stock}</td>
+                <td data-label="" className={td}>
+                  <div className="flex items-center justify-end gap-1">
+                    <Link href={`/admin/products/${p.id}`} className="inline-flex h-11 items-center rounded-full px-3 text-sm underline underline-offset-4 hover:bg-sage">Edit</Link>
                     <DeleteButton kind="product" id={p.id} label={p.name} />
                   </div>
                 </td>

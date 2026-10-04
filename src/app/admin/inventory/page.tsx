@@ -8,8 +8,8 @@ export const metadata: Metadata = { title: "Admin · Inventory" };
 
 const LOW = 5;
 const chip = (active: boolean) =>
-  `inline-flex h-9 items-center rounded-full border px-4 text-sm transition-colors ${
-    active ? "border-forest bg-forest text-cream" : "border-forest/20 text-forest hover:bg-sage/30"
+  `inline-flex h-11 items-center rounded-full sm:h-9 border px-4 text-sm transition-colors ${
+    active ? "border-forest bg-forest text-cream" : "border-forest/20 text-forest hover:bg-sage/70"
   }`;
 
 export default async function AdminInventory({
@@ -59,13 +59,13 @@ export default async function AdminInventory({
           <tbody className="divide-y divide-border">
             {products.map((p) => (
               <tr key={p.id}>
-                <td className={td}>
+                <td data-label="Product" className={td}>
                   <Link href={`/admin/products/${p.id}`} className="font-medium hover:underline">
                     {p.name}
                   </Link>
                 </td>
-                <td className={td}>{p.categories?.name ?? "—"}</td>
-                <td className={td}>
+                <td data-label="Category" className={td}>{p.categories?.name ?? "—"}</td>
+                <td data-label="Status" className={td}>
                   {p.stock === 0 ? (
                     <span className="text-destructive">Sold out</span>
                   ) : p.stock <= LOW ? (
@@ -74,7 +74,7 @@ export default async function AdminInventory({
                     "In stock"
                   )}
                 </td>
-                <td className={td}>
+                <td data-label="Stock" className={td}>
                   <StockForm productId={p.id} stock={p.stock} name={p.name} />
                 </td>
               </tr>

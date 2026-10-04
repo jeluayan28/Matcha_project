@@ -19,7 +19,7 @@ export function CartLineControls({
   const unavailable = stock < 1;
   const short = !unavailable && quantity > stock;
   const step =
-    "flex size-10 items-center justify-center rounded-full text-forest hover:bg-sage/30 disabled:opacity-40";
+    "flex size-11 items-center justify-center rounded-full text-forest hover:bg-sage/70 disabled:opacity-40";
 
   return (
     <form action={action} aria-busy={pending}>
@@ -36,7 +36,7 @@ export function CartLineControls({
             name="intent"
             value="fix"
             disabled={pending}
-            className="mt-1 text-sm font-medium text-forest underline underline-offset-4 disabled:opacity-50"
+            className="mt-1 inline-flex h-11 items-center text-sm font-medium text-forest underline underline-offset-4 disabled:opacity-50"
           >
             {unavailable ? "Remove from cart" : `Update to ${stock}`}
           </button>
@@ -47,7 +47,7 @@ export function CartLineControls({
           <div
             role="group"
             aria-label={`Quantity of ${name}`}
-            className="inline-flex h-10 items-center rounded-full border border-forest/20 bg-card"
+            className="inline-flex h-11 items-center rounded-full border border-forest/20 bg-card"
           >
             <button
               type="submit"
@@ -82,7 +82,7 @@ export function CartLineControls({
           name="intent"
           value="remove"
           disabled={pending}
-          className="inline-flex h-10 items-center gap-1.5 rounded-full px-3 text-sm text-forest/70 hover:bg-sage/30 hover:text-forest disabled:opacity-50"
+          className="inline-flex h-11 items-center gap-1.5 rounded-full px-3 text-sm text-forest/70 hover:bg-sage/70 hover:text-forest disabled:opacity-50"
         >
           <Trash2 className="size-4" aria-hidden />
           Remove
@@ -114,7 +114,7 @@ export function ClearCartButton() {
       <button
         type="submit"
         disabled={pending}
-        className="text-sm text-forest/70 underline underline-offset-4 hover:text-forest disabled:opacity-50"
+        className="inline-flex h-11 items-center text-sm text-forest/70 underline underline-offset-4 hover:text-forest disabled:opacity-50"
       >
         {pending ? "Clearing…" : "Clear cart"}
       </button>

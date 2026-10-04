@@ -93,6 +93,17 @@ export function validateCategory(v: CategoryValues) {
   };
 }
 
+export const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+export const IMAGE_MIME_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+
+// Quick client-side check (MIME + size). The server re-checks size and the real file bytes.
+export function checkImageFile(file: { type: string; size: number }): string | null {
+  if (!IMAGE_MIME_TYPES.includes(file.type)) return "Use a JPG, PNG, WebP or AVIF image.";
+  if (file.size === 0) return "That file is empty.";
+  if (file.size > MAX_IMAGE_BYTES) return "Image must be 5 MB or smaller.";
+  return null;
+}
+
 // Detect image type from file bytes: the browser-supplied MIME type can't be trusted.
 export function sniffImage(bytes: Uint8Array): { mime: string; ext: string } | null {
   const hex = (n: number) => Array.from(bytes.slice(0, n), (b) => b.toString(16).padStart(2, "0")).join("");

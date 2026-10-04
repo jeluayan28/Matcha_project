@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Leaf, Search } from "lucide-react";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ProductCard } from "@/components/shop/product-card";
@@ -24,10 +25,10 @@ function shopHref(params: Partial<ShopParams>) {
 }
 
 const chip = (active: boolean) =>
-  `inline-flex h-10 items-center rounded-full border px-5 text-sm transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none ${
+  `inline-flex h-11 items-center rounded-full border px-5 text-sm transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none ${
     active
       ? "border-forest bg-forest text-cream"
-      : "border-forest/20 text-forest hover:bg-sage/30"
+      : "border-forest/20 text-forest hover:border-forest/40 hover:bg-sage"
   }`;
 
 export default async function ShopPage({
@@ -54,7 +55,8 @@ export default async function ShopPage({
       <SiteHeader />
       <main className="flex-1 bg-cream">
         <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 md:py-20">
-          <h1 className="text-5xl font-medium text-forest sm:text-6xl">
+          <Eyebrow>The shop</Eyebrow>
+          <h1 className="mt-4 text-5xl font-medium text-forest sm:text-6xl lg:text-7xl">
             {activeCategory ? activeCategory.name : "Shop matcha"}
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-forest/70">
@@ -153,7 +155,7 @@ export default async function ShopPage({
               />
             )
           ) : (
-            <ul className="mt-6 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:grid-cols-4">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} returnTo={returnTo} />
               ))}
@@ -183,7 +185,7 @@ function Notice({
       {action && (
         <Link
           href={action.href}
-          className="mt-2 inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-forest transition-colors hover:bg-matcha/85"
+          className="mt-2 inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-white transition-colors hover:bg-forest"
         >
           {action.label}
         </Link>

@@ -9,8 +9,8 @@ import { formatPrice } from "@/lib/shop/format";
 export const metadata: Metadata = { title: "Admin · Orders" };
 
 const chip = (active: boolean) =>
-  `inline-flex h-9 items-center rounded-full border px-4 text-sm transition-colors ${
-    active ? "border-forest bg-forest text-cream" : "border-forest/20 text-forest hover:bg-sage/30"
+  `inline-flex h-11 items-center rounded-full sm:h-9 border px-4 text-sm transition-colors ${
+    active ? "border-forest bg-forest text-cream" : "border-forest/20 text-forest hover:bg-sage/70"
   }`;
 
 export default async function AdminOrders({
@@ -64,7 +64,7 @@ export default async function AdminOrders({
           <tbody className="divide-y divide-border">
             {orders.map((o) => (
               <tr key={o.id}>
-                <td className={td}>
+                <td data-label="Order" className={td}>
                   <Link
                     href={`/admin/orders/${o.id}`}
                     className="font-medium underline-offset-4 hover:underline"
@@ -72,19 +72,19 @@ export default async function AdminOrders({
                     {orderNumber(o.id)}
                   </Link>
                 </td>
-                <td className={td}>
+                <td data-label="Customer" className={td}>
                   {(o.shipping_address as { full_name?: string } | null)?.full_name ?? "—"}
                 </td>
-                <td className={td}>{formatDate(o.created_at)}</td>
-                <td className={td}>{o.order_items.reduce((n, i) => n + i.quantity, 0)}</td>
-                <td className={td}>
+                <td data-label="Date" className={td}>{formatDate(o.created_at)}</td>
+                <td data-label="Items" className={td}>{o.order_items.reduce((n, i) => n + i.quantity, 0)}</td>
+                <td data-label="Status" className={td}>
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-medium ${STATUS_TONE[o.status]}`}
                   >
                     {STATUS_LABEL[o.status]}
                   </span>
                 </td>
-                <td className={`${td} text-right font-medium`}>{formatPrice(o.total_amount)}</td>
+                <td data-label="Total" className={`${td} text-right font-medium`}>{formatPrice(o.total_amount)}</td>
               </tr>
             ))}
           </tbody>

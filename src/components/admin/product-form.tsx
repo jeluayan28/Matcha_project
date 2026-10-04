@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { createProduct, updateProduct, type ProductState } from "@/app/actions/admin";
 import { Field, FormAlert } from "@/components/auth/form-parts";
+import { ImageUpload } from "@/components/admin/image-upload";
 import { adminButton, adminButtonOutline } from "@/components/admin/ui";
 import type { ProductValues } from "@/lib/admin/validation";
 
@@ -15,7 +16,7 @@ export type ProductFormProps = {
 };
 
 const control =
-  "w-full rounded-2xl border border-input bg-cream/60 px-4 py-3 text-base text-forest outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50";
+  "w-full rounded-2xl border border-input bg-white px-4 py-3 text-base text-forest outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50";
 
 export function ProductForm({ productId, categories, imageUrl, initial }: ProductFormProps) {
   const [state, action, pending] = useActionState<ProductState, FormData>(
@@ -78,31 +79,7 @@ export function ProductForm({ productId, categories, imageUrl, initial }: Produc
         Featured product
       </label>
 
-      <div className="space-y-2">
-        <label htmlFor="image" className="block text-sm font-medium text-forest">
-          Product image
-        </label>
-        {imageUrl && (
-          // eslint-disable-next-line @next/next/no-img-element -- admin preview of a Storage URL
-          <img src={imageUrl} alt="Current product" className="size-32 rounded-2xl bg-sage/40 object-cover" />
-        )}
-        <input
-          id="image"
-          name="image"
-          type="file"
-          accept="image/jpeg,image/png,image/webp,image/avif"
-          aria-invalid={e.image ? true : undefined}
-          className="block w-full text-sm text-forest file:mr-4 file:rounded-full file:border-0 file:bg-sage/50 file:px-5 file:py-2 file:text-sm file:font-medium file:text-forest"
-        />
-        <p className="text-xs text-forest/60">JPG, PNG, WebP or AVIF, up to 5 MB.</p>
-        {e.image && <p className="text-sm text-destructive">{e.image}</p>}
-        {imageUrl && (
-          <label className="flex items-center gap-2 text-sm text-forest/80">
-            <input type="checkbox" name="removeImage" className="size-4 accent-[var(--forest)]" />
-            Remove current image
-          </label>
-        )}
-      </div>
+      <ImageUpload currentUrl={imageUrl} serverError={e.image} />
 
       <div className="flex gap-3 pt-2">
         <button type="submit" disabled={pending} className={adminButton}>

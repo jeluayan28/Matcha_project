@@ -21,7 +21,7 @@ export default async function RegisterPage() {
           Already have an account?{" "}
           <Link
             href="/login"
-            className="font-medium text-forest underline underline-offset-4"
+            className="inline-block py-3 font-medium text-forest underline underline-offset-4"
           >
             Sign in
           </Link>

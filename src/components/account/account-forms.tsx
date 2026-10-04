@@ -10,7 +10,7 @@ import {
 import { Field, FormAlert } from "@/components/auth/form-parts";
 
 const submit =
-  "inline-flex h-11 items-center justify-center rounded-full bg-matcha px-7 text-sm font-medium text-forest transition-colors hover:bg-matcha/85 disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex h-11 items-center justify-center rounded-full bg-matcha px-7 text-sm font-medium text-white transition-colors hover:bg-forest disabled:cursor-not-allowed disabled:opacity-60";
 
 export function ProfileForm({
   fullName,

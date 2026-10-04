@@ -12,10 +12,10 @@ export const STATUS_LABEL: Record<OrderStatus, string> = {
 
 export const STATUS_TONE: Record<OrderStatus, string> = {
   pending: "bg-cream text-forest ring-1 ring-forest/20",
-  paid: "bg-sage/50 text-forest",
-  processing: "bg-sage/50 text-forest",
+  paid: "bg-sage text-forest",
+  processing: "bg-sage text-forest",
   shipped: "bg-matcha/40 text-forest",
-  delivered: "bg-matcha text-forest",
+  delivered: "bg-matcha text-white",
   cancelled: "bg-destructive/10 text-destructive",
   refunded: "bg-destructive/10 text-destructive",
 };

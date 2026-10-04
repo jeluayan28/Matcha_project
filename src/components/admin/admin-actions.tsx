@@ -50,7 +50,7 @@ export function DeleteButton({
       <button
         type="submit"
         disabled={pending}
-        className="text-sm text-destructive underline underline-offset-4 disabled:opacity-50"
+        className="inline-flex h-11 items-center rounded-full px-3 text-sm text-destructive underline underline-offset-4 hover:bg-destructive/10 disabled:opacity-50"
       >
         {pending ? "Deleting…" : "Delete"}
       </button>
@@ -75,9 +75,9 @@ export function StockForm({ productId, stock, name }: { productId: string; stock
           min={0}
           step={1}
           defaultValue={stock}
-          className="h-10 w-24 rounded-xl border border-input bg-cream/60 px-3 text-forest outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="h-11 w-24 rounded-full border border-input bg-white px-3 text-forest outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         />
-        <button type="submit" disabled={pending} className={`${adminButton} h-10 px-5`}>
+        <button type="submit" disabled={pending} className={`${adminButton} px-5`}>
           {pending ? "Saving…" : "Save"}
         </button>
       </div>
@@ -165,7 +165,7 @@ export function OrderStatusForm({
         id="status"
         name="status"
         defaultValue={options[0]}
-        className="h-11 w-full rounded-2xl border border-input bg-cream/60 px-4 text-forest outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+        className="h-11 w-full rounded-full border border-input bg-white px-4 text-forest outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
       >
         {options.map((o) => (
           <option key={o} value={o}>

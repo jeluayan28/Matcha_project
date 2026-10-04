@@ -3,23 +3,23 @@
 import Link from "next/link";
 import { StatusPage, statusButton, statusButtonOutline } from "@/components/ui/status-page";
 
-export default function CartError({ reset }: { error: Error; reset: () => void }) {
+export default function GlobalError({ reset }: { error: Error; reset: () => void }) {
   return (
     <StatusPage
-      eyebrow="Your cart"
-      title="We couldn't show your cart"
+      eyebrow="Something went wrong"
+      title="We hit a small snag"
       actions={
         <>
           <button type="button" onClick={reset} className={statusButton}>
             Try again
           </button>
-          <Link href="/shop" className={statusButtonOutline}>
-            Keep shopping
+          <Link href="/" className={statusButtonOutline}>
+            Back home
           </Link>
         </>
       }
     >
-      Your items are safe. Please try again.
+      Nothing you did. Please try again in a moment.
     </StatusPage>
   );
 }

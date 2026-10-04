@@ -113,13 +113,13 @@ export default async function ConfirmationPage({
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
               href={`/account/orders/${order.id}`}
-              className="inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-forest hover:bg-matcha/85"
+              className="inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-white hover:bg-forest"
             >
               View order
             </Link>
             <Link
               href="/shop"
-              className="inline-flex h-11 items-center rounded-full border border-forest/25 px-7 text-sm font-medium text-forest hover:bg-sage/30"
+              className="inline-flex h-11 items-center rounded-full border border-forest/25 px-7 text-sm font-medium text-forest hover:bg-sage/70"
             >
               Continue shopping
             </Link>

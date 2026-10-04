@@ -11,7 +11,7 @@ export function HeroVisual() {
       preserveAspectRatio="xMidYMax slice"
     >
       {/* sun */}
-      <circle cx="200" cy="175" r="78" fill="#8fb04a" opacity="0.28" />
+      <circle cx="200" cy="175" r="78" fill="#C7A86B" opacity="0.35" />
       {/* tea sprig */}
       <g fill="#2f5240">
         <ellipse cx="62" cy="120" rx="30" ry="12" transform="rotate(-35 62 120)" />

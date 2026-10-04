@@ -45,14 +45,14 @@ export default async function ProductPage({ params }: Props) {
         <div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 md:py-14">
           <Link
             href="/shop"
-            className="inline-flex items-center gap-1 text-sm text-forest/70 hover:text-forest"
+            className="-ml-2 inline-flex h-11 items-center gap-1 px-2 text-sm text-forest/70 hover:text-forest"
           >
             <ChevronLeft className="size-4" aria-hidden />
             Back to shop
           </Link>
 
-          <div className="mt-6 grid gap-10 md:grid-cols-2 md:gap-14">
-            <div className="relative aspect-square overflow-hidden rounded-3xl bg-sage/40">
+          <div className="mt-2 grid gap-8 md:mt-6 md:grid-cols-2 md:gap-14">
+            <div className="relative aspect-square overflow-hidden rounded-3xl bg-sage">
               {isAllowedImage(product.image_url) ? (
                 <Image
                   src={product.image_url}
@@ -73,15 +73,15 @@ export default async function ProductPage({ params }: Props) {
               {product.categories && (
                 <Link
                   href={`/shop?category=${product.categories.slug}`}
-                  className="text-sm text-forest/60 hover:text-forest"
+                  className="inline-block py-2 text-sm text-forest/60 hover:text-forest"
                 >
                   {product.categories.name}
                 </Link>
               )}
-              <h1 className="mt-2 text-5xl leading-tight font-medium text-forest sm:text-6xl">
+              <h1 className="mt-2 text-4xl leading-tight font-medium text-forest sm:text-5xl lg:text-6xl">
                 {product.name}
               </h1>
-              <p className="mt-4 text-3xl text-forest">{formatPrice(product.price)}</p>
+              <p className="mt-3 text-2xl text-forest sm:mt-4 sm:text-3xl">{formatPrice(product.price)}</p>
               <p className={`mt-3 text-sm font-medium ${stock.tone}`}>{stock.label}</p>
 
               {product.description && (
@@ -99,7 +99,7 @@ export default async function ProductPage({ params }: Props) {
                 <h2 id="product-info" className="text-2xl font-medium text-forest">
                   Product information
                 </h2>
-                <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 text-sm">
+                <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-sm sm:gap-x-8">
                   <dt className="text-forest/60">Category</dt>
                   <dd className="text-forest">{product.categories?.name ?? "—"}</dd>
                   <dt className="text-forest/60">Availability</dt>
@@ -120,11 +120,11 @@ export default async function ProductPage({ params }: Props) {
           </div>
 
           {related && related.length > 0 && (
-            <section aria-labelledby="related" className="mt-20">
+            <section aria-labelledby="related" className="mt-16 sm:mt-20">
               <h2 id="related" className="text-3xl font-medium text-forest">
                 You may also like
               </h2>
-              <ul className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+              <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:grid-cols-4">
                 {related.map((p) => (
                   <ProductCard key={p.id} product={p} returnTo={path} />
                 ))}

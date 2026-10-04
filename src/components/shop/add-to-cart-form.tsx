@@ -5,7 +5,11 @@ import { Check, Minus, Plus, ShoppingBag } from "lucide-react";
 import { addToCart, type CartState } from "@/app/actions/cart";
 
 const pill =
-  "inline-flex items-center justify-center gap-2 rounded-full bg-matcha font-medium text-forest transition-colors hover:bg-matcha/85 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-matcha";
+  "inline-flex items-center justify-center gap-2 rounded-full bg-matcha font-medium text-white transition-colors hover:bg-forest focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-matcha";
+
+// Quieter button for product grids: fills in on hover so a row of cards stays calm.
+const outline =
+  "inline-flex items-center justify-center gap-2 rounded-full border border-forest/30 bg-transparent font-medium text-forest transition-colors hover:border-matcha hover:bg-matcha hover:text-white focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-forest/30 disabled:hover:bg-transparent disabled:hover:text-forest";
 
 function Feedback({ state }: { state: CartState }) {
   return (
@@ -35,14 +39,14 @@ export function AddToCartButton({
 }) {
   const [state, action, pending] = useActionState(addToCart, {});
   return (
-    <form action={action} className="mt-4">
+    <form action={action} className="mt-3 sm:mt-4">
       <input type="hidden" name="productId" value={productId} />
       <input type="hidden" name="quantity" value="1" />
       <input type="hidden" name="next" value={next} />
       <button
         type="submit"
         disabled={soldOut || pending}
-        className={`${pill} h-11 w-full text-sm`}
+        className={`${outline} h-11 w-full px-2 text-sm`}
       >
         <ShoppingBag className="size-4" aria-hidden />
         {soldOut ? "Sold out" : pending ? "Adding…" : "Add to cart"}
@@ -71,18 +75,18 @@ export function AddToCartForm({
     <form action={action} className="mt-8">
       <input type="hidden" name="productId" value={productId} />
       <input type="hidden" name="next" value={next} />
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
         <div
           role="group"
           aria-label="Quantity"
-          className="inline-flex h-12 items-center rounded-full border border-forest/20 bg-card"
+          className="inline-flex h-12 w-fit items-center rounded-full border border-forest/20 bg-card"
         >
           <button
             type="button"
             aria-label="Decrease quantity"
             disabled={soldOut || qty <= 1}
             onClick={() => setQty((q) => clamp(q - 1))}
-            className="flex size-12 items-center justify-center rounded-full text-forest hover:bg-sage/30 disabled:opacity-40"
+            className="flex size-12 items-center justify-center rounded-full text-forest hover:bg-sage/70 disabled:opacity-40"
           >
             <Minus className="size-4" aria-hidden />
           </button>
@@ -103,7 +107,7 @@ export function AddToCartForm({
             aria-label="Increase quantity"
             disabled={soldOut || qty >= stock}
             onClick={() => setQty((q) => clamp(q + 1))}
-            className="flex size-12 items-center justify-center rounded-full text-forest hover:bg-sage/30 disabled:opacity-40"
+            className="flex size-12 items-center justify-center rounded-full text-forest hover:bg-sage/70 disabled:opacity-40"
           >
             <Plus className="size-4" aria-hidden />
           </button>
@@ -111,7 +115,7 @@ export function AddToCartForm({
         <button
           type="submit"
           disabled={soldOut || pending}
-          className={`${pill} h-12 flex-1 px-8 text-base sm:flex-none`}
+          className={`${pill} h-12 w-full px-8 text-base sm:w-auto`}
         >
           <ShoppingBag className="size-5" aria-hidden />
           {soldOut ? "Sold out" : pending ? "Adding…" : "Add to cart"}

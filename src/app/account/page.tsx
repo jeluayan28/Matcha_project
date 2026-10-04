@@ -35,7 +35,7 @@ export default async function ProfilePage() {
         {profile?.role === "admin" && (
           <Link
             href="/admin"
-            className="mt-5 inline-flex h-10 items-center rounded-full bg-matcha px-6 text-sm font-medium text-forest hover:bg-matcha/85"
+            className="mt-5 inline-flex h-11 items-center rounded-full bg-matcha px-6 text-sm font-medium text-white hover:bg-forest"
           >
             Admin dashboard
           </Link>

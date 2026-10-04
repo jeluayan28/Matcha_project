@@ -94,7 +94,7 @@ function Notice({
       {action && (
         <Link
           href={action.href}
-          className="mt-2 inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-forest hover:bg-matcha/85"
+          className="mt-2 inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-white hover:bg-forest"
         >
           {action.label}
         </Link>

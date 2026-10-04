@@ -24,7 +24,7 @@ export function Field({
         name={name}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className="h-12 rounded-2xl bg-cream/60 px-4 text-base text-forest md:text-base"
+        className="h-12 rounded-full bg-white px-4 text-base text-forest md:text-base"
         {...props}
       />
       {error && (
@@ -49,7 +49,7 @@ export function FormAlert({
       className={
         variant === "error"
           ? "rounded-2xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
-          : "rounded-2xl border border-matcha/40 bg-sage/30 px-4 py-3 text-sm text-forest"
+          : "rounded-2xl border border-matcha/30 bg-sage px-4 py-3 text-sm text-forest"
       }
     >
       {children}
@@ -70,7 +70,7 @@ export function SubmitButton({
     <Button
       type="submit"
       disabled={pending}
-      className="h-12 w-full rounded-full bg-matcha text-base font-medium text-forest hover:bg-matcha/85"
+      className="h-12 w-full rounded-full bg-matcha text-base font-medium tracking-wide text-white transition-colors hover:bg-forest"
     >
       {pending ? busy : idle}
     </Button>

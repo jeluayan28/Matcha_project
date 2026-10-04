@@ -46,8 +46,8 @@ export default async function CartPage() {
               <section aria-label="Cart items">
                 <ul className="divide-y divide-border border-y border-border">
                   {lines.map((line) => (
-                    <li key={line.id} className="flex gap-5 py-6">
-                      <div className="relative size-24 shrink-0 overflow-hidden rounded-2xl bg-sage/40 sm:size-32">
+                    <li key={line.id} className="flex gap-4 py-5 sm:gap-5 sm:py-6">
+                      <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-sage sm:size-32">
                         {isAllowedImage(line.product?.image_url ?? null) ? (
                           <Image
                             src={line.product!.image_url!}
@@ -63,10 +63,10 @@ export default async function CartPage() {
                         )}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-baseline justify-between gap-4">
-                          <h2 className="text-2xl leading-tight font-medium text-forest">
+                        <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                          <h2 className="text-xl leading-tight font-medium text-forest sm:text-2xl">
                             {line.product ? (
-                              <Link href={`/shop/${line.product.slug}`} className="hover:underline">
+                              <Link href={`/shop/${line.product.slug}`} className="break-words hover:underline">
                                 {line.product.name}
                               </Link>
                             ) : (
@@ -98,8 +98,8 @@ export default async function CartPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 flex items-center justify-between">
-                  <Link href="/shop" className="text-sm text-forest/70 underline underline-offset-4 hover:text-forest">
+                <div className="mt-4 flex items-center justify-between">
+                  <Link href="/shop" className="inline-flex h-11 items-center text-sm text-forest/70 underline underline-offset-4 hover:text-forest">
                     Continue shopping
                   </Link>
                   <ClearCartButton />
@@ -135,7 +135,7 @@ export default async function CartPage() {
                 {issues === 0 && !error ? (
                   <Link
                     href="/checkout"
-                    className="mt-5 inline-flex h-12 w-full items-center justify-center rounded-full bg-matcha text-base font-medium text-forest transition-colors hover:bg-matcha/85"
+                    className="mt-5 hidden h-12 lg:inline-flex w-full items-center justify-center rounded-full bg-matcha text-base font-medium text-white transition-colors hover:bg-forest"
                   >
                     Proceed to checkout
                   </Link>
@@ -143,12 +143,28 @@ export default async function CartPage() {
                   <button
                     type="button"
                     disabled
-                    className="mt-5 inline-flex h-12 w-full items-center justify-center rounded-full bg-matcha text-base font-medium text-forest opacity-50"
+                    className="mt-5 inline-flex h-12 w-full items-center justify-center rounded-full bg-matcha text-base font-medium text-white opacity-50"
                   >
                     Proceed to checkout
                   </button>
                 )}
               </aside>
+            </div>
+          )}
+
+          {!error && lines.length > 0 && issues === 0 && (
+            // Mobile: subtotal + checkout stay within thumb reach while scrolling the list.
+            <div className="sticky bottom-0 z-20 -mx-5 mt-8 flex items-center gap-4 border-t border-border bg-cream/95 px-5 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur sm:-mx-8 sm:px-8 lg:hidden">
+              <div>
+                <p className="text-xs text-forest/60">Subtotal</p>
+                <p className="text-lg font-medium text-forest tabular-nums">{formatPrice(subtotal)}</p>
+              </div>
+              <Link
+                href="/checkout"
+                className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-matcha text-base font-medium text-white transition-colors hover:bg-forest"
+              >
+                Checkout
+              </Link>
             </div>
           )}
         </div>
@@ -175,7 +191,7 @@ function Notice({
       {action && (
         <Link
           href={action.href}
-          className="mt-2 inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-forest transition-colors hover:bg-matcha/85"
+          className="mt-2 inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-white transition-colors hover:bg-forest"
         >
           {action.label}
         </Link>

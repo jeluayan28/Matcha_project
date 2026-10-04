@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth/admin";
 import {
+  MAX_IMAGE_BYTES,
   isUuid,
   readProduct,
   sniffImage,
@@ -36,7 +37,6 @@ export type CategoryState = {
 export type SimpleState = { status?: "success" | "error"; message?: string };
 
 const BUCKET = "product-images";
-const MAX_IMAGE = 5 * 1024 * 1024;
 const GENERIC = "Something went wrong. Please try again.";
 
 function str(formData: FormData, key: string) {
@@ -60,7 +60,7 @@ async function uploadImage(
   supabase: Supabase,
   file: File
 ): Promise<{ url: string } | { error: string }> {
-  if (file.size > MAX_IMAGE) return { error: "Image must be 5 MB or smaller." };
+  if (file.size > MAX_IMAGE_BYTES) return { error: "Image must be 5 MB or smaller." };
   const bytes = new Uint8Array(await file.arrayBuffer());
   const type = sniffImage(bytes);
   if (!type) return { error: "Use a JPG, PNG, WebP or AVIF image." };

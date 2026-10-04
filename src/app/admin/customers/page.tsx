@@ -35,7 +35,7 @@ export default async function AdminCustomers() {
           <tbody className="divide-y divide-border">
             {customers.map((c) => (
               <tr key={c.id}>
-                <td className={td}>
+                <td data-label="Name" className={td}>
                   <span className="font-medium">{c.full_name ?? "—"}</span>
                   {c.role === "admin" && (
                     <span className="ml-2 rounded-full bg-matcha/40 px-2 py-0.5 text-xs">
@@ -43,11 +43,11 @@ export default async function AdminCustomers() {
                     </span>
                   )}
                 </td>
-                <td className={td}>{c.email}</td>
-                <td className={td}>{c.phone ?? "—"}</td>
-                <td className={td}>{formatDate(c.created_at)}</td>
-                <td className={`${td} text-right`}>{Number(c.order_count)}</td>
-                <td className={`${td} text-right`}>{formatPrice(Number(c.total_spent))}</td>
+                <td data-label="Email" className={td}>{c.email}</td>
+                <td data-label="Phone" className={td}>{c.phone ?? "—"}</td>
+                <td data-label="Joined" className={td}>{formatDate(c.created_at)}</td>
+                <td data-label="Orders" className={`${td} text-right`}>{Number(c.order_count)}</td>
+                <td data-label="Spent" className={`${td} text-right`}>{formatPrice(Number(c.total_spent))}</td>
               </tr>
             ))}
           </tbody>

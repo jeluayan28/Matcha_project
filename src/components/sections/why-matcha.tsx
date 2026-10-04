@@ -1,3 +1,6 @@
+import { Reveal } from "@/components/motion/reveal";
+import { Eyebrow } from "@/components/ui/eyebrow";
+
 const REASONS = [
   {
     title: "Grown in the shade",
@@ -17,11 +20,12 @@ export function WhyMatcha() {
   return (
     <section
       id="why-matcha"
-      className="scroll-mt-16 bg-sage/35 py-20 md:py-28"
+      className="scroll-mt-16 bg-sage py-20 md:py-28"
     >
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-        <div className="max-w-md">
-          <h2 className="text-4xl leading-[1.05] font-medium text-forest sm:text-5xl">
+        <Reveal className="max-w-md">
+          <Eyebrow>Why matcha</Eyebrow>
+          <h2 className="mt-4 text-4xl leading-[1.05] font-medium text-forest sm:text-5xl lg:text-6xl">
             Why matcha, and why now
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-forest/70">
@@ -29,9 +33,10 @@ export function WhyMatcha() {
             ceremony. It still works as a daily pause: a few quiet minutes, one
             bowl, no screens.
           </p>
-        </div>
+        </Reveal>
 
-        <dl className="divide-y divide-forest/15 border-y border-forest/15">
+        <Reveal delay={0.1}>
+        <dl className="divide-y divide-forest/15 border-y border-forest/20">
           {REASONS.map((reason) => (
             <div key={reason.title} className="py-7 sm:grid sm:grid-cols-[11rem_1fr] sm:gap-8">
               <dt className="font-heading text-2xl font-medium text-forest">
@@ -43,6 +48,7 @@ export function WhyMatcha() {
             </div>
           ))}
         </dl>
+        </Reveal>
       </div>
     </section>
   );

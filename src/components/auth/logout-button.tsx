@@ -11,7 +11,7 @@ function Submit() {
       type="submit"
       variant="outline"
       disabled={pending}
-      className="h-11 rounded-full border-forest/30 px-6 text-forest hover:bg-sage/30"
+      className="h-11 rounded-full border-forest/30 px-6 text-forest hover:bg-sage/70"
     >
       {pending ? "Signing out…" : "Sign out"}
     </Button>

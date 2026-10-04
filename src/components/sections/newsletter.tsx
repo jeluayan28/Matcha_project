@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { subscribe, type NewsletterState } from "@/app/actions/newsletter";
 
 export function Newsletter() {
@@ -12,9 +13,10 @@ export function Newsletter() {
   return (
     <section id="newsletter" className="scroll-mt-16 bg-cream pb-20 md:pb-28">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <div className="grid gap-8 rounded-[2rem] bg-forest px-6 py-12 text-cream sm:px-12 md:grid-cols-2 md:items-center md:gap-14 md:py-16">
+        <div className="grid gap-8 rounded-3xl bg-forest px-6 py-12 text-cream sm:px-12 md:grid-cols-2 md:items-center md:gap-14 md:py-16">
           <div>
-            <h2 className="text-4xl leading-[1.05] font-medium sm:text-5xl">
+            <Eyebrow tone="dark">Newsletter</Eyebrow>
+            <h2 className="mt-4 text-4xl leading-[1.05] font-medium sm:text-5xl">
               Join the ritual
             </h2>
             <p className="mt-4 max-w-sm leading-relaxed text-cream/75">
@@ -26,7 +28,7 @@ export function Newsletter() {
           {state.status === "success" ? (
             <p
               role="status"
-              className="rounded-2xl border border-matcha/50 bg-matcha/15 px-5 py-4 text-cream"
+              className="rounded-2xl border border-gold/50 bg-cream/5 px-5 py-4 text-cream"
             >
               {state.message}
             </p>
@@ -48,7 +50,7 @@ export function Newsletter() {
                   aria-describedby={
                     state.status === "error" ? "newsletter-error" : undefined
                   }
-                  className="h-12 min-w-0 flex-1 rounded-full border border-cream/25 bg-cream/10 px-5 text-base text-cream outline-none placeholder:text-cream/50 focus-visible:border-matcha focus-visible:ring-3 focus-visible:ring-matcha/40 disabled:opacity-60"
+                  className="h-12 min-w-0 sm:flex-1 rounded-full border border-cream/25 bg-cream/10 px-5 text-base text-cream outline-none placeholder:text-cream/50 focus-visible:border-gold focus-visible:ring-3 focus-visible:ring-gold/40 disabled:opacity-60"
                 />
                 {/* Honeypot: hidden from people, filled in by bots. */}
                 <input
@@ -61,7 +63,7 @@ export function Newsletter() {
                 <button
                   type="submit"
                   disabled={pending}
-                  className="h-12 rounded-full bg-matcha px-8 text-base font-medium text-forest transition-colors hover:bg-matcha/85 focus-visible:ring-3 focus-visible:ring-matcha/40 focus-visible:outline-none disabled:opacity-60"
+                  className="h-12 rounded-full bg-gold px-8 text-base font-medium text-forest transition-colors hover:bg-cream focus-visible:ring-3 focus-visible:ring-gold/40 focus-visible:outline-none disabled:opacity-60"
                 >
                   {pending ? "Subscribing…" : "Subscribe"}
                 </button>

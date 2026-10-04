@@ -1,3 +1,6 @@
+import { Reveal } from "@/components/motion/reveal";
+import { Eyebrow } from "@/components/ui/eyebrow";
+
 export function BrandStory() {
   return (
     <section id="story" className="scroll-mt-16 bg-cream py-20 md:py-28">
@@ -17,12 +20,13 @@ export function BrandStory() {
               strokeWidth="13"
               strokeLinecap="round"
             />
-            <circle cx="100" cy="100" r="6" fill="#8fb04a" />
+            <circle cx="100" cy="100" r="6" fill="#C7A86B" />
           </svg>
         </div>
 
-        <div className="max-w-xl">
-          <h2 className="text-4xl leading-[1.05] font-medium text-forest sm:text-5xl">
+        <Reveal className="max-w-xl">
+          <Eyebrow>Our story</Eyebrow>
+          <h2 className="mt-4 text-4xl leading-[1.05] font-medium text-forest sm:text-5xl lg:text-6xl">
             A slower way to start the day
           </h2>
           <div className="mt-6 space-y-5 text-lg leading-relaxed text-forest/75">
@@ -36,7 +40,7 @@ export function BrandStory() {
               and packed fresh, with nothing between you and the leaf.
             </p>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

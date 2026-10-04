@@ -23,10 +23,10 @@ export function AccountNav() {
             key={tab.href}
             href={tab.href}
             aria-current={active ? "page" : undefined}
-            className={`inline-flex h-10 shrink-0 items-center rounded-full border px-5 text-sm transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none ${
+            className={`inline-flex h-11 shrink-0 items-center rounded-full border px-5 text-sm transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none ${
               active
                 ? "border-forest bg-forest text-cream"
-                : "border-forest/20 text-forest hover:bg-sage/30"
+                : "border-forest/20 text-forest hover:bg-sage/70"
             }`}
           >
             {tab.label}

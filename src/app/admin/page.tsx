@@ -96,19 +96,19 @@ export default async function AdminDashboard() {
             <tbody className="divide-y divide-border">
               {recentRes.data.map((o) => (
                 <tr key={o.id}>
-                  <td className={td}>
+                  <td data-label="Order" className={td}>
                     <Link href={`/admin/orders/${o.id}`} className="font-medium underline-offset-4 hover:underline">
                       {orderNumber(o.id)}
                     </Link>
                   </td>
-                  <td className={td}>{(o.shipping_address as { full_name?: string } | null)?.full_name ?? "—"}</td>
-                  <td className={td}>{formatDate(o.created_at)}</td>
-                  <td className={td}>
+                  <td data-label="Customer" className={td}>{(o.shipping_address as { full_name?: string } | null)?.full_name ?? "—"}</td>
+                  <td data-label="Date" className={td}>{formatDate(o.created_at)}</td>
+                  <td data-label="Status" className={td}>
                     <span className={`rounded-full px-3 py-1 text-xs font-medium ${STATUS_TONE[o.status]}`}>
                       {STATUS_LABEL[o.status]}
                     </span>
                   </td>
-                  <td className={`${td} text-right font-medium`}>{formatPrice(o.total_amount)}</td>
+                  <td data-label="Total" className={`${td} text-right font-medium`}>{formatPrice(o.total_amount)}</td>
                 </tr>
               ))}
             </tbody>

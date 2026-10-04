@@ -16,11 +16,11 @@ export function AuthShell({
       <div className="w-full max-w-md">
         <Link
           href="/"
-          className="mb-10 block text-center font-heading text-3xl font-semibold tracking-[0.04em] text-forest"
+          className="mx-auto mb-8 block w-fit px-2 py-2 text-center font-heading text-3xl font-semibold tracking-[0.04em] text-forest"
         >
           mori
         </Link>
-        <div className="rounded-3xl border border-border bg-card px-6 py-9 shadow-sm shadow-forest/5 sm:px-10">
+        <div className="rounded-3xl border border-border bg-card px-6 py-9 sm:px-10">
           <h1 className="text-center text-4xl font-medium text-forest">
             {title}
           </h1>

@@ -29,7 +29,7 @@ export default async function LoginPage({
           New here?{" "}
           <Link
             href="/register"
-            className="font-medium text-forest underline underline-offset-4"
+            className="inline-block py-3 font-medium text-forest underline underline-offset-4"
           >
             Create an account
           </Link>
