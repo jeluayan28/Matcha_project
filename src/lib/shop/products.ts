@@ -25,8 +25,9 @@ export async function getProducts(
   if (params.featured) query = query.eq("is_featured", true);
 
   if (params.q) {
-    // Strip characters that are special in PostgREST filters and LIKE patterns.
-    const term = params.q.replace(/[%_\,()*]/g, " ").replace(/\s+/g, " ").trim();
+    // The term is interpolated into a PostgREST filter string, so strip everything that can
+    // end a value or start a new condition (, ( ) " backslash) and LIKE wildcards (% _ *).
+    const term = params.q.replace(/[%_,()*"\\]/g, " ").replace(/\s+/g, " ").trim();
     if (term) query = query.or(`name.ilike.%${term}%,description.ilike.%${term}%`);
   }
 

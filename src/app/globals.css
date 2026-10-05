@@ -55,11 +55,11 @@
 
 :root {
   /* Brand palette */
-  --cream: #F7F5EC;
-  --sage: #E7E8D5;
-  --matcha: #315C3A;
-  --forest: #173A27;
-  --gold: #C7A86B;
+  --cream: #FFF2F2;
+  --sage: #FFDADA;
+  --matcha: #165823;
+  --forest: #0F3F19;
+  --gold: #FF788D;
 
   --background: var(--cream);
   --foreground: var(--forest);
@@ -71,13 +71,13 @@
   --primary-foreground: #FFFFFF;
   --secondary: var(--sage);
   --secondary-foreground: var(--forest);
-  --muted: #EFEEE0;
-  --muted-foreground: #587060;
+  --muted: #FCE6E6;
+  --muted-foreground: #5B7A62;
   --accent: var(--sage);
   --accent-foreground: var(--forest);
   --destructive: #A63A2B;
-  --border: #DEDCC8;
-  --input: #D3D1BA;
+  --border: #F5CACA;
+  --input: #EFB8B8;
   --ring: var(--gold);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);

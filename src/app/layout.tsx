@@ -15,16 +15,21 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Matcha — Premium Ceremonial Matcha",
+  title: "Matchelli",
   description:
     "Premium Japanese matcha, stone-ground and delivered fresh to your door.",
+  icons: {
+    icon: "/LOGO.png",
+    shortcut: "/LOGO.png",
+    apple: "/LOGO.png",
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#F7F5EC",
+  themeColor: "#FFF2F2",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

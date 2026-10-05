@@ -23,7 +23,12 @@ function field(formData: FormData, name: string) {
   return typeof value === "string" ? value : "";
 }
 
+// Base URL for the confirmation-email link. Prefer the configured SITE_URL: the Host /
+// X-Forwarded-Host headers are client-controlled and must not decide where an emailed link
+// points (Supabase also checks its redirect allow-list, but don't rely on that alone).
 async function getOrigin() {
+  const configured = process.env.SITE_URL?.trim().replace(/\/+$/, "");
+  if (configured) return configured;
   const h = await headers();
   const host = h.get("x-forwarded-host") ?? h.get("host");
   const proto =

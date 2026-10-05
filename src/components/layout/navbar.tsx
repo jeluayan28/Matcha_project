@@ -82,7 +82,7 @@ export function Navbar({
           href="/"
           className="-ml-1 justify-self-start px-1 py-3 font-heading text-3xl leading-none font-semibold tracking-[0.08em] text-forest"
         >
-          mori
+          matchelli
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-9 md:flex">

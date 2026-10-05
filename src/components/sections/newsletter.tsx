@@ -72,7 +72,7 @@ export function Newsletter() {
                 <p
                   id="newsletter-error"
                   role="alert"
-                  className="mt-3 text-sm text-[#ffb4a6]"
+                  className="mt-3 text-sm text-[#FFDADA]"
                 >
                   {state.message}
                 </p>

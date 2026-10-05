@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { isUuid } from "@/lib/admin/validation";
 import { safeNext } from "@/lib/auth/redirect";
 import { createClient } from "@/lib/supabase/server";
 
@@ -18,9 +19,9 @@ export async function addToCart(
   const rawQty = Number(formData.get("quantity") ?? 1);
   const next = safeNext(String(formData.get("next") ?? ""), "/shop");
 
-  if (typeof productId !== "string" || !productId)
+  if (typeof productId !== "string" || !isUuid(productId))
     return { status: "error", message: "Product not found." };
-  if (!Number.isInteger(rawQty) || rawQty < 1)
+  if (!Number.isInteger(rawQty) || rawQty < 1 || rawQty > 1000)
     return { status: "error", message: "Choose a valid quantity." };
 
   const supabase = await createClient();
@@ -82,6 +83,7 @@ export async function updateCartLine(
   const intent = formData.get("intent");
   if (
     typeof itemId !== "string" ||
+    !isUuid(itemId) ||
     !["inc", "dec", "remove", "fix"].includes(String(intent))
   )
     return { status: "error", message: "Something went wrong. Please try again." };

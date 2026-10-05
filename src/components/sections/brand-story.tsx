@@ -20,7 +20,7 @@ export function BrandStory() {
               strokeWidth="13"
               strokeLinecap="round"
             />
-            <circle cx="100" cy="100" r="6" fill="#C7A86B" />
+            <circle cx="100" cy="100" r="6" fill="#FF788D" />
           </svg>
         </div>
 
