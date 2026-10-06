@@ -1,12 +1,23 @@
 import Link from "next/link";
-import { HeroArch, HeroItem, HeroMotion } from "@/components/motion/hero-motion";
+import Image from "next/image";
+import { HeroItem, HeroMotion } from "@/components/motion/hero-motion";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { HeroVisual } from "./hero-visual";
 
 export function Hero() {
   return (
-    <section className="bg-cream">
-      <HeroMotion className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 pt-12 pb-16 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:gap-10 md:pt-16 md:pb-24 lg:gap-16">
+    <section className="relative overflow-hidden bg-cream">
+      <div aria-hidden className="absolute inset-0">
+        <Image
+          src="/bg.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[75%_center]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--cream)_0%,var(--cream)_28%,color-mix(in_srgb,var(--cream)_80%,transparent)_40%,color-mix(in_srgb,var(--cream)_35%,transparent)_52%,transparent_68%)] max-md:bg-[linear-gradient(to_right,color-mix(in_srgb,var(--cream)_92%,transparent),color-mix(in_srgb,var(--cream)_60%,transparent))]" />
+      </div>
+      <HeroMotion className="relative mx-auto flex min-h-[560px] w-full max-w-6xl items-center px-5 pt-12 pb-16 sm:px-8 md:min-h-[640px] md:pt-16 md:pb-24">
         <div className="max-w-xl">
           <HeroItem>
             <Eyebrow>Pure · Natural · Mindful</Eyebrow>
@@ -35,10 +46,16 @@ export function Hero() {
           </HeroItem>
         </div>
 
-        <HeroArch className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-t-full bg-sage md:max-w-none">
-          <HeroVisual />
-        </HeroArch>
       </HeroMotion>
+      <a
+        href="#benefits"
+        className="absolute bottom-8 left-1/2 hidden w-full max-w-6xl -translate-x-1/2 items-center gap-3 px-8 text-[0.65rem] tracking-[0.25em] text-forest/60 uppercase md:flex"
+      >
+        <span aria-hidden className="flex h-9 w-5 justify-center rounded-full border border-forest/50 pt-1.5">
+          <span className="h-1.5 w-px rounded-full bg-forest/60" />
+        </span>
+        Scroll
+      </a>
     </section>
   );
 }

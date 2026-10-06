@@ -14,7 +14,7 @@ async function getFeaturedProducts() {
     )
     .eq("is_featured", true)
     .order("created_at", { ascending: false })
-    .limit(4);
+    .limit(3);
 }
 
 export async function FeaturedProducts() {
@@ -22,17 +22,25 @@ export async function FeaturedProducts() {
 
   return (
     <section id="featured" className="scroll-mt-16 bg-cream py-20 md:py-28">
-      <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <Reveal className="max-w-xl">
-          <Eyebrow>The collection</Eyebrow>
-          <h2 className="mt-4 text-4xl font-medium text-forest sm:text-5xl lg:text-6xl">
-            Featured matcha
+      <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_2.2fr] lg:gap-14">
+        <Reveal className="max-w-sm self-center">
+          <Eyebrow>Our collection</Eyebrow>
+          <h2 className="mt-4 text-4xl leading-[1.05] font-medium text-forest sm:text-5xl">
+            Find Your Perfect Matcha
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-forest/70">
+          <p className="mt-4 leading-relaxed text-forest/70">
             Small-batch blends for your whisk, your latte and your baking.
           </p>
+          <Link
+            href="/shop"
+            className="mt-8 inline-flex h-12 items-center gap-2 rounded-full border border-forest/30 px-8 text-sm font-medium tracking-wide text-forest transition-colors hover:border-forest hover:bg-forest hover:text-cream"
+          >
+            View All Products
+            <span aria-hidden>→</span>
+          </Link>
         </Reveal>
 
+        <div>
         {error ? (
           <Notice
             title="We couldn't load the shop"
@@ -46,7 +54,7 @@ export async function FeaturedProducts() {
           />
         ) : (
           <Reveal>
-            <ul className="mt-14 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:grid-cols-4">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} returnTo="/" />
               ))}
@@ -54,12 +62,7 @@ export async function FeaturedProducts() {
           </Reveal>
         )}
 
-        <Link
-          href="/shop"
-          className="mt-14 inline-flex h-12 items-center rounded-full border border-forest/30 px-8 text-sm font-medium tracking-wide text-forest transition-colors hover:border-forest hover:bg-forest hover:text-cream"
-        >
-          Shop all matcha
-        </Link>
+        </div>
       </div>
     </section>
   );
