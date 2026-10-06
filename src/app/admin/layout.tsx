@@ -11,7 +11,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <header className="border-b border-border bg-cream">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
           <Link href="/admin" className="font-heading text-2xl font-semibold tracking-[0.04em] text-forest">
-            mori <span className="text-sm font-normal tracking-normal text-forest/60">admin</span>
+            matchelli <span className="text-sm font-normal tracking-normal text-forest/60">admin</span>
           </Link>
           <Link href="/" className="inline-flex h-11 items-center text-sm text-forest/70 hover:text-forest">
             View store →

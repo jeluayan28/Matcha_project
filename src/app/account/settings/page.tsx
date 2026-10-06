@@ -24,7 +24,7 @@ export default async function SettingsPage() {
           Sign out
         </h2>
         <p className="mt-2 mb-5 text-sm text-forest/70">
-          Sign out of mori on this device.
+          Sign out of matchelli on this device.
         </p>
         <LogoutButton />
       </section>

@@ -31,7 +31,7 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-[1.4fr_2fr]">
           <div className="max-w-xs">
             <p className="font-heading text-3xl font-semibold tracking-[0.08em]">
-              mori
+              matchelli
             </p>
             <p className="mt-3 text-sm leading-relaxed text-cream/70">
               Premium Japanese matcha for slow mornings and mindful afternoons.
@@ -60,7 +60,7 @@ export function SiteFooter() {
           </div>
         </div>
         <p className="mt-14 border-t border-cream/15 pt-6 text-xs tracking-wide text-cream/55">
-          © {new Date().getFullYear()} mori. All rights reserved.
+          © {new Date().getFullYear()} matchelli. All rights reserved.
         </p>
       </div>
     </footer>

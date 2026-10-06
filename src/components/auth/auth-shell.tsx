@@ -18,7 +18,7 @@ export function AuthShell({
           href="/"
           className="mx-auto mb-8 block w-fit px-2 py-2 text-center font-heading text-3xl font-semibold tracking-[0.04em] text-forest"
         >
-          mori
+          matchelli
         </Link>
         <div className="rounded-3xl border border-border bg-card px-6 py-9 sm:px-10">
           <h1 className="text-center text-4xl font-medium text-forest">

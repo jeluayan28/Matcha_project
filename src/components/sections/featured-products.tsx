@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Leaf } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
@@ -51,6 +52,7 @@ export async function FeaturedProducts() {
             title="Our first harvest is being packed"
             text="Products will appear here as soon as they're ready."
             action={{ href: "#newsletter", label: "Get notified at launch" }}
+            image={{ src: "/matcha%20tin.png", alt: "Matchelli premium matcha tin with a bamboo whisk and scoop" }}
           />
         ) : (
           <Reveal>
@@ -72,24 +74,43 @@ function Notice({
   title,
   text,
   action,
+  image,
 }: {
   title: string;
   text: string;
   action?: { href: string; label: string };
+  image?: { src: string; alt: string };
 }) {
   return (
-    <div className="mt-12 flex flex-col items-start gap-3 rounded-3xl border border-dashed border-forest/25 bg-card px-6 py-10 sm:px-10">
-      <Leaf className="size-7 text-matcha" strokeWidth={1.5} aria-hidden />
-      <h3 className="text-2xl font-medium text-forest">{title}</h3>
-      <p className="max-w-md text-forest/70">{text}</p>
-      {action && (
-        <Link
-          href={action.href}
-          className="mt-2 inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-white transition-colors hover:bg-forest"
-        >
-          {action.label}
-        </Link>
+    <div
+      className={`mt-12 overflow-hidden rounded-3xl border border-dashed border-forest/25 bg-card ${
+        image ? "grid sm:grid-cols-[0.9fr_1.1fr] sm:items-stretch" : ""
+      }`}
+    >
+      {image && (
+        <div className="relative aspect-square sm:aspect-auto sm:min-h-72">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(min-width: 1024px) 28vw, (min-width: 640px) 40vw, 100vw"
+            className="object-cover"
+          />
+        </div>
       )}
+      <div className="flex flex-col items-start justify-center gap-3 px-6 py-10 sm:px-10">
+        <Leaf className="size-7 text-matcha" strokeWidth={1.5} aria-hidden />
+        <h3 className="text-2xl font-medium text-forest">{title}</h3>
+        <p className="max-w-md text-forest/70">{text}</p>
+        {action && (
+          <Link
+            href={action.href}
+            className="mt-2 inline-flex h-11 items-center rounded-full bg-matcha px-7 text-sm font-medium text-white transition-colors hover:bg-forest"
+          >
+            {action.label}
+          </Link>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,18 +1,13 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { WhyMatchaSlideshow } from "./why-matcha-slideshow";
 
 export function WhyMatcha() {
   return (
     <section id="why-matcha" className="scroll-mt-16 bg-sage">
       <div className="grid lg:grid-cols-2">
-        {/* Photo slot: leave blank for now. To fill it, add
-            <Image src="/why-matcha.jpg" alt="..." fill sizes="50vw" className="object-cover" />
-            inside this div. */}
-        <div
-          aria-hidden
-          className="relative min-h-72 bg-forest/10 sm:min-h-96 lg:min-h-[28rem]"
-        />
+        <WhyMatchaSlideshow />
 
         <div className="relative flex items-center overflow-hidden px-5 py-16 sm:px-8 lg:py-24 lg:pl-16 lg:pr-[max(2rem,calc((100vw-72rem)/2+2rem))]">
           <Reveal className="max-w-lg">
